@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\questaoI.obj",
+".\Objects\questaoII.obj",
+".\Objects\questaoIII.obj" 
+TO ".\Objects\Questoes I, II e III" 
+PRINT(".\Listings\Questoes I, II e III.m51") RAMSIZE(256) 

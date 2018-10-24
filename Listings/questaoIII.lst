@@ -1,0 +1,82 @@
+C51 COMPILER V9.59.0.0   QUESTAOIII                                                        10/23/2018 22:40:26 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE QUESTAOIII
+OBJECT MODULE PLACED IN .\Objects\questaoIII.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE questaoIII.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\questaoIII.lst) TABS(2) OBJECT(.\Objects\questaoIII.obj)
+
+line level    source
+
+   1          #include <at89x52.h>
+   2          
+   3          #define stopBoxes P1_7
+   4          #define stopProducts P1_1
+   5          
+   6          #define products P1_0
+   7          #define boxes P1_6
+   8          
+   9          
+  10          
+  11          
+  12          int counter = 0;
+  13          
+  14          const HIGH = 1;
+  15          const LOW = 0;
+  16          
+  17          void fullBox() interrupt 1
+  18            {
+  19   1        TR0 = 0;
+  20   1        TH0 = 0x3C;
+  21   1        TL0 = 0xAF;
+  22   1        TR0 = 1; 
+  23   1        counter++;
+  24   1          
+  25   1        if(counter == 2500)
+  26   1        {
+  27   2          stopProducts = HIGH;
+  28   2          stopBoxes = HIGH;
+  29   2          products = LOW;
+  30   2          boxes = LOW;
+  31   2        }else if(counter == 5000)
+  32   1        {
+  33   2          stopProducts = LOW; 
+  34   2          stopBoxes = LOW;
+  35   2          products = HIGH;
+  36   2          boxes = HIGH;
+  37   2          counter = 0;
+  38   2        }
+  39   1      }
+  40          
+  41          int main()
+  42          {
+  43   1          EA = 1; 
+  44   1          ET0 = 1;
+  45   1          TMOD = 1; 
+  46   1          TR0 = 1;
+  47   1        
+  48   1        products = HIGH;
+  49   1          boxes   = HIGH;
+  50   1        
+  51   1          P1 = LOW;
+  52   1           
+  53   1          while(1)
+  54   1          {
+C51 COMPILER V9.59.0.0   QUESTAOIII                                                        10/23/2018 22:40:26 PAGE 2   
+
+  55   2          }
+  56   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    117    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

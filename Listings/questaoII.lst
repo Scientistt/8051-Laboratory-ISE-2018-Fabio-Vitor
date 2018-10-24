@@ -1,0 +1,132 @@
+C51 COMPILER V9.59.0.0   QUESTAOII                                                         10/23/2018 22:40:26 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE QUESTAOII
+OBJECT MODULE PLACED IN .\Objects\questaoII.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE questaoII.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\questaoII.lst) TABS(2) OBJECT(.\Objects\questaoII.obj)
+
+line level    source
+
+   1          #include <at89x52.h>
+   2          
+   3          #define CAMERA1 P1_0
+   4          #define CAMERA2 P1_1
+   5          #define CAMERA3 P1_2
+   6          #define CAMERA4 P1_3
+   7          
+   8          #define ROOM1 P0_0
+   9          #define ROOM2 P0_1
+  10          #define ROOM3 P0_2
+  11          #define ROOM4 P0_3
+  12           
+  13          const 1 = 1;
+*** ERROR C141 IN LINE 13 OF questaoII.c: syntax error near '1', expected 'hdata'
+  14          const 0 = 0;
+*** ERROR C141 IN LINE 14 OF questaoII.c: syntax error near '0', expected 'hdata'
+  15          int counter = 0;
+  16          
+  17          void foundSomeOne() interrupt 0
+  18          {
+  19   1        if(ROOM1 == 1 || ROOM2 == 1 || ROOM3 == 1 || ROOM4 == 1 )
+  20   1        {
+  21   2            P3_1 = ~P3_1;
+  22   2            P3_3 = ~P3_3;
+  23   2            P3_3 = ~P3_4;
+  24   2            P3_5 = ~P3_5;
+  25   2            P3_6 = ~P3_6;
+  26   2            P3_7 = ~P3_7;
+  27   2        }
+  28   1      }
+  29          
+  30          void takeABreak()
+  31          {
+  32   1        while(ROOM1 == 0 && ROOM2 == 0 && ROOM3 == 0 && ROOM4 == 0)
+  33   1        {
+  34   2          CAMERA1 = 0;
+  35   2          CAMERA2 = 0;
+  36   2          CAMERA3 = 0;
+  37   2          CAMERA4 = 0;
+  38   2          counter = 0;
+  39   2          
+  40   2          if(ROOM1 == 1 && ROOM2 == 0 && ROOM3 == 0 && ROOM4 == 0)
+  41   2          {
+  42   3            counter = 60;
+  43   3            break;
+  44   3          }
+  45   2          else if(ROOM1 == 0 && ROOM2 == 1 && ROOM3 == 0 && ROOM4 == 0)
+  46   2          {
+  47   3            counter = 120;
+  48   3            break;
+  49   3          }
+  50   2          else if(ROOM1 == 0 && ROOM2 == 0 && ROOM3 == 1 && ROOM4 == 0)
+  51   2          {
+  52   3            counter = 180;
+C51 COMPILER V9.59.0.0   QUESTAOII                                                         10/23/2018 22:40:26 PAGE 2   
+
+  53   3            break;
+  54   3          }
+  55   2          else if(ROOM1 == 0 && ROOM2 == 0 && ROOM3 == 0 && ROOM4 == 1)
+  56   2          {
+  57   3            counter = 220;
+  58   3            break;
+  59   3          }
+  60   2        }
+  61   1      }
+  62          
+  63          void caixaCheiaInterrupt() interrupt 1
+  64          {
+  65   1        TR0 = 0;
+  66   1        TH0 = 0x3C;
+  67   1        TL0 = 0xAF;
+  68   1        TR0 = 1;
+  69   1        
+  70   1        if(counter == 60)
+  71   1        { 
+  72   2          CAMERA1 = 1;
+  73   2          CAMERA2 = 0;
+  74   2          CAMERA3 = 0;
+  75   2          CAMERA4 = 0;
+  76   2          
+  77   2        }else if(counter == 120)
+  78   1        { 
+  79   2          CAMERA2 = 1;
+  80   2          CAMERA1 = 0;
+  81   2          CAMERA3 = 0;
+  82   2          CAMERA4 = 0;
+  83   2        } else if(counter == 180)
+  84   1        {
+  85   2          CAMERA3 = 1;
+  86   2          CAMERA1 = 0;
+  87   2          CAMERA2 = 0;
+  88   2          CAMERA4 = 0;
+  89   2        }else if(counter == 240)
+  90   1        {
+  91   2          CAMERA4 = 1;
+  92   2          CAMERA1 = 0;
+  93   2          CAMERA2 = 0;
+  94   2          CAMERA3 = 0;
+  95   2          contador = 0;
+*** ERROR C202 IN LINE 95 OF questaoII.c: 'contador': undefined identifier
+  96   2        }
+  97   1        counter++;
+  98   1        takeABreak();
+  99   1      }
+ 100          
+ 101          int main()
+ 102            {
+ 103   1          EA = 1;
+ 104   1          EX0 = 1;
+ 105   1          ET0 = 1;
+ 106   1          TMOD = 1; 
+ 107   1          TR0 = 1;
+ 108   1          P1 = 0;
+ 109   1          
+ 110   1          while(1)
+ 111   1          {
+ 112   2          }
+ 113   1      }
+C51 COMPILER V9.59.0.0   QUESTAOII                                                         10/23/2018 22:40:26 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
