@@ -10,8 +10,8 @@
 #define ROOM3 P0_2
 #define ROOM4 P0_3
  
-const 1 = 1;
-const 0 = 0;
+const HIGH = 1;
+const LOW = 0;
 int counter = 0;
 
 void foundSomeOne() interrupt 0
@@ -92,7 +92,7 @@ void caixaCheiaInterrupt() interrupt 1
 		CAMERA1 = 0;
 		CAMERA2 = 0;
 		CAMERA3 = 0;
-		contador = 0;
+		counter = 0;
 	}
 	counter++;
 	takeABreak();
